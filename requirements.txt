@@ -8,3 +8,5 @@ safetensors
 opencv-python
 torchvision
 mediapipe
+einops
+fonts
