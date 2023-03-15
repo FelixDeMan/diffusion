@@ -1,3 +1,4 @@
+accelerate
 diffusers>=0.11.0
 transformers>=4.25.1
 scipy
