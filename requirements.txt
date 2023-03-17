@@ -11,3 +11,4 @@ torchvision
 mediapipe
 einops
 fonts
+pyrallis

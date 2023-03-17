@@ -31,10 +31,10 @@ from tqdm.auto import tqdm
 from transformers import CLIPTextModel, CLIPTokenizer
 import wandb
 import fire
-
-from lora_diffusion import (
+from lora_diffusion.lora import extract_lora_ups_down
+from lora_diffusion.dataset import (
     PivotalTuningDatasetCapation,
-    extract_lora_ups_down,
+    
     inject_trainable_lora,
     inject_trainable_lora_extended,
     inspect_lora,
