@@ -5,11 +5,11 @@ import pyrallis
 import torch
 from PIL import Image
 
-from utils.config import RunConfig
-from pipeline_attend_and_excite import AttendAndExcitePipeline
-from utils import ptp_utils, vis_utils
-from utils.ptp_utils import AttentionStore
 
+from utils.ptp_utils import AttentionStore, register_attention_control
+from utils.config_file import RunConfig
+from pipeline_attend_and_excite import AttendAndExcitePipeline
+#import utils.ptp_utils0
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 
@@ -44,7 +44,9 @@ def run_on_prompt(prompt: List[str],
                   seed: torch.Generator,
                   config: RunConfig) -> Image.Image:
     if controller is not None:
-        ptp_utils.register_attention_control(model, controller)
+        
+        register_attention_control(model, controller)
+
     outputs = model(prompt=prompt,
                     attention_store=controller,
                     indices_to_alter=token_indices,

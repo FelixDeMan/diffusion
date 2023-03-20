@@ -112,7 +112,7 @@ class AttendAndExcitePipeline(StableDiffusionPipeline):
                     "The following part of your input was truncated because CLIP can only handle sequences up to"
                     f" {self.tokenizer.model_max_length} tokens: {removed_text}"
                 )
-
+        
             if hasattr(self.text_encoder.config, "use_attention_mask") and self.text_encoder.config.use_attention_mask:
                 attention_mask = text_inputs.attention_mask.to(device)
             else:
@@ -214,7 +214,10 @@ class AttendAndExcitePipeline(StableDiffusionPipeline):
         for i in indices_to_alter:
             image = attention_for_text[:, :, i]
             if smooth_attentions:
-                smoothing = GaussianSmoothing(channels=1, kernel_size=kernel_size, sigma=sigma, dim=2).cuda()
+                #if 'cuda' in self._execution_device:
+                #    smoothing = GaussianSmoothing(channels=1, kernel_size=kernel_size, sigma=sigma, dim=2).cuda()
+                #else: 
+                smoothing = GaussianSmoothing(channels=1, kernel_size=kernel_size, sigma=sigma, dim=2)#.cuda()
                 input = F.pad(image.unsqueeze(0).unsqueeze(0), (1, 1, 1, 1), mode='reflect')
                 image = smoothing(input).squeeze(0).squeeze(0)
             max_indices_list.append(image.max())
