@@ -1,6 +1,5 @@
 data_*
-output_*
-__pycache__
+pycache__
 *.pyc
 __test*
 merged_lora*
