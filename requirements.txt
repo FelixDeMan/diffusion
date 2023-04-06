@@ -18,3 +18,4 @@ folium==0.9.1
 scikit-image==0.19.2 
 git+https://github.com/energy-based-model/Compositional-Visual-Generation-with-Composable-Diffusion-Models-PyTorch.git@dev
 git+https://github.com/openai/glide-text2im
+torchmetrics
