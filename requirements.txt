@@ -12,6 +12,7 @@ mediapipe
 einops
 fonts
 pyrallis
+torchmetrics
 huggingface-hub
 pillow==9.0.0
 folium==0.9.1
