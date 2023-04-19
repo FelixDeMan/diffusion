@@ -11,3 +11,4 @@ lora_diffusion.egg-info
 output/summary.parquet
 databricks
 *.parquet
+display_results.ipynb
