@@ -1,4 +1,7 @@
-accelerate
+accelerate>=0.16.0
+torchvision
+tensorboard
+Jinja2
 diffusers>=0.11.0
 transformers>=4.25.1
 scipy

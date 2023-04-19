@@ -9,7 +9,7 @@ from typing import Union, Tuple, List
 
 from diffusers.models.cross_attention import CrossAttention
 
-def text_under_image(image: np.ndarray, text: str, text_color: Tuple[int, int, int] = (0, 0, 0)) -> np.ndarray:
+def text_under_image(image: np.ndarray, text: str, text_color: Tuple[int, int, int] = (255, 255, 255)) -> np.ndarray:
     h, w, c = image.shape
     offset = int(h * .2)
     img = np.ones((h + offset, w, c), dtype=np.uint8) * 255
@@ -53,6 +53,16 @@ def view_images(images: Union[np.ndarray, List],
         display(pil_img)
     return pil_img
 
+def view_with_clipscore(image: Union[np.ndarray, List], clipscore: str, display_image: bool = True) -> Image.Image:
+    clipscore = str(clipscore)
+    if isinstance(image,list):
+        for img in image:
+            print("adding text")
+            img = text_under_image(img, clipscore)
+            view_images(img)
+    else:
+        image = text_under_image(image, clipscore)
+    view_images(image, display_image=display_image)
 
 class AttendExciteCrossAttnProcessor:
 
