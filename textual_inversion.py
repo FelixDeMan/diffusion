@@ -135,7 +135,7 @@ def save_progress(text_encoder, placeholder_token_id, accelerator, args, save_pa
     torch.save(learned_embeds_dict, save_path)
 
 
-def parse_args():
+def parse_args(input_args=None):
     parser = argparse.ArgumentParser(description="Simple example of a training script.")
     parser.add_argument(
         "--save_steps",
@@ -369,8 +369,10 @@ def parse_args():
     parser.add_argument(
         "--enable_xformers_memory_efficient_attention", action="store_true", help="Whether or not to use xformers."
     )
-
-    args = parser.parse_args()
+    if input_args is not None:
+        args = parser.parse_args(input_args)
+    else:
+        args = parser.parse_args()
     env_local_rank = int(os.environ.get("LOCAL_RANK", -1))
     if env_local_rank != -1 and env_local_rank != args.local_rank:
         args.local_rank = env_local_rank
@@ -520,8 +522,8 @@ class TextualInversionDataset(Dataset):
         return example
 
 
-def main():
-    args = parse_args()
+def main(args):
+    
     logging_dir = os.path.join(args.output_dir, args.logging_dir)
 
     accelerator_project_config = ProjectConfiguration(total_limit=args.checkpoints_total_limit)
