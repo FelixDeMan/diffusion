@@ -29,22 +29,25 @@ from torch.utils.data import Dataset
 from torchvision import transforms
 from tqdm.auto import tqdm
 from transformers import CLIPTextModel, CLIPTokenizer
-import wandb
+#import wandb
 import fire
 from lora_diffusion.lora import extract_lora_ups_down
 from lora_diffusion.dataset import (
-    PivotalTuningDatasetCapation,
-    
+    PivotalTuningDatasetCapation
+)
+from lora_diffusion.utils import (
+    prepare_clip_model_sets,
+    evaluate_pipe,
+)
+
+from lora_diffusion.lora import(
     inject_trainable_lora,
     inject_trainable_lora_extended,
     inspect_lora,
-    save_lora_weight,
     save_all,
-    prepare_clip_model_sets,
-    evaluate_pipe,
+  
     UNET_EXTENDED_TARGET_REPLACE,
 )
-
 
 def get_models(
     pretrained_model_name_or_path,
